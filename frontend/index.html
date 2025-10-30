@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revit Changes Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Страница входа -->
+        <div id="loginPage" class="auth-page">
+            <div class="auth-container">
+                <h1>Вход в систему</h1>
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email</label>
+                        <input type="email" id="loginEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Пароль</label>
+                        <input type="password" id="loginPassword" required>
+                    </div>
+                    <button type="submit" class="auth-btn">Войти</button>
+                </form>
+                <div class="auth-links">
+                    <p>Нет аккаунта? <a href="#" id="showRegister">Зарегистрироваться</a></p>
+                </div>
+                <div id="loginError" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Страница регистрации -->
+        <div id="registerPage" class="auth-page hidden">
+            <div class="auth-container">
+                <h1>Регистрация</h1>
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="registerName">Имя</label>
+                        <input type="text" id="registerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerEmail">Email</label>
+                        <input type="email" id="registerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerPassword">Пароль</label>
+                        <input type="password" id="registerPassword" minlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">Подтвердите пароль</label>
+                        <input type="password" id="registerConfirmPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="registerDepartment">Отдел</label>
+                        <select id="registerDepartment" required>
+                            <option value="">Выберите отдел</option>
+                            <option value="architecture">Архитектура</option>
+                            <option value="structure">Конструкции</option>
+                            <option value="mep">ИС/ОВ/ВК</option>
+                            <option value="management">Управление</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="auth-btn">Зарегистрироваться</button>
+                </form>
+                <div class="auth-links">
+                    <p>Уже есть аккаунт? <a href="#" id="showLogin">Войти</a></p>
+                </div>
+                <div id="registerError" class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Основное приложение (после входа) -->
+        <div id="mainApp" class="hidden">
+            <!-- Шапка с пользователем -->
+            <header class="app-header">
+                <div class="header-left">
+                    <h1>Revit Changes Monitor</h1>
+                    <span id="currentUser" class="user-info"></span>
+                </div>
+                <div class="header-right">
+                    <div class="filters">
+                        <select id="userFilter">
+                            <option value="__auto__">Выберите пользователя…</option>
+                        </select>
+                        <select id="timeFilter">
+                            <option value="1h">Последний час</option>
+                            <option value="24h">Последние 24 часа</option>
+                            <option value="7d">Последние 7 дней</option>
+                        </select>
+                        <button id="refreshBtn">Обновить</button>
+                    </div>
+                    <div class="user-menu">
+                        <button id="logoutBtn" class="logout-btn">Выйти</button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Контент приложения -->
+            <main class="app-main">
+                <!-- График изменений по времени -->
+                <section class="chart-section">
+                    <h2>Изменения во времени</h2>
+                    <div class="chart-container">
+                        <canvas id="changesChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Таблица последних изменений -->
+                <section class="table-section">
+                    <h2>Последние изменения</h2>
+                    <div class="table-container">
+                        <table id="changesTable">
+                            <thead>
+                                <tr>
+                                    <th>Время</th>
+                                    <th>Проект</th>
+                                    <th>Добавлено</th>
+                                    <th>Изменено</th>
+                                    <th>Удалено</th>
+                                    <th>Пользователь</th>
+                                </tr>
+                            </thead>
+                            <tbody id="changesTableBody">
+                                <!-- Данные будут здесь -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Статистика -->
+                <section class="stats-section">
+                    <h2>Статистика изменений</h2>
+                    <div class="stats-cards">
+                        <div class="stat-card added">
+                            <h3>Добавлено</h3>
+                            <span id="addedCount">0</span>
+                        </div>
+                        <div class="stat-card modified">
+                            <h3>Изменено</h3>
+                            <span id="modifiedCount">0</span>
+                        </div>
+                        <div class="stat-card deleted">
+                            <h3>Удалено</h3>
+                            <span id="deletedCount">0</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<RevitAddIns>
+  <AddIn Type="Application">
+    <Name>RevitMetrics</Name>
+	<Assembly>RevitMetrics\RevitMetrics.dll</Assembly>
+    <AddInId>6c7af0d2-70a6-44a3-b5d0-ab9458eb445a</AddInId>
+    <FullClassName>RevitMetrics.App</FullClassName>
+    <VendorId>PishMirea</VendorId>
+    <VendorDescription>Metrics collector for Revit projects</VendorDescription>
+  </AddIn>
+</RevitAddIns>
